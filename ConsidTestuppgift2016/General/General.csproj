@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\CompanyHomeViewModel.cs" />
-    <Compile Include="Models\Store.cs" />
+    <Compile Include="Models\StoreViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

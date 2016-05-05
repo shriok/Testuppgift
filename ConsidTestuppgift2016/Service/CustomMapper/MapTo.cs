@@ -9,39 +9,134 @@ namespace Service.CustomMapper
 {
     public class MapTo
     {
-        public static Company Company(Repository.Companies c)
+        /// <summary>
+        /// Maps a repository company entity object to a General.Model company object
+        /// </summary>
+        /// <param name="repCompany">repository company entity object</param>
+        /// <returns>General.Model Company object</returns>
+        public static Company Company(Repository.Companies repCompany)
         {
-            Company comp = new Company
+            try
             {
-                Id = c.Id.ToString(),
-                Name = c.Name,
-                Notes = c.Notes,
-                OrganizationNumber = c.OrganizationNumber
-            };
-            return comp;
-        }
-
-        public static Repository.Companies Company(Company c)
-        {
-            Repository.Companies comp = new Repository.Companies
-            {
-                Id = new Guid(c.Id),
-                Name = c.Name,
-                Notes = c.Notes,
-                OrganizationNumber = c.OrganizationNumber
-            };
-            return comp;
-        }
-
-        public static List<Company> Companies (List<Repository.Companies> compToMap)
-        {
-            List<Company> LComp = new List<Company>();
-
-            foreach (Repository.Companies c in compToMap)
-            {
-                LComp.Add(Company(c));
+                Company comp = new Company
+                {
+                    Id = repCompany.Id,
+                    Name = repCompany.Name,
+                    Notes = repCompany.Notes,
+                    OrganizationNumber = repCompany.OrganizationNumber
+                };
+                return comp;
             }
-            return LComp;
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// Maps a General.Model company object to a repository company entity object
+        /// </summary>
+        /// <param name="modelCompany">General.Model Company</param>
+        /// <returns>repository company entity object</returns>
+        public static Repository.Companies Company(Company modelCompany)
+        {
+            try
+            {
+                Repository.Companies comp = new Repository.Companies
+                {
+                    Id = modelCompany.Id,
+                    Name = modelCompany.Name,
+                    Notes = modelCompany.Notes,
+                    OrganizationNumber = modelCompany.OrganizationNumber
+                };
+                return comp;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// Maps a List of repository company entity object to a list of general.model company objects
+        /// </summary>
+        /// <param name="compToMap">List of repository company entity object</param>
+        /// <returns>List of General.Model company object</returns>
+        public static List<Company> Companies(List<Repository.Companies> compToMap)
+        {
+            try
+            {
+                List<Company> LComp = new List<Company>();
+
+                foreach (Repository.Companies c in compToMap)
+                {
+                    LComp.Add(Company(c));
+                }
+                return LComp;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// Mapps a StoreViewModel object to a repository store entity object
+        /// </summary>
+        /// <param name="store">StoreViewModel object</param>
+        /// <returns>repository store entity object</returns>
+        public static Repository.Stores Store(StoreViewModel store)
+        {
+            try
+            {
+                Repository.Stores reposStore = new Repository.Stores();
+                reposStore.Id = store.Id;
+                reposStore.CompanyId = store.CompanyId;
+                reposStore.Name = store.Name;
+                reposStore.Address = store.Address;
+                reposStore.City = store.City;
+                reposStore.Zip = store.Zip;
+                reposStore.Country = store.Country;
+                reposStore.Longitude = store.Longitude;
+                reposStore.Latitude = store.Latitude;
+                return reposStore;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// Mapps a repository store entity object to a StoreViewModel object
+        /// </summary>
+        /// <param name="reposStore">repository store entity object</param>
+        /// <returns>StoreViewModel object</returns>
+        public static StoreViewModel Store(Repository.Stores reposStore)
+        {
+            try
+            {
+                StoreViewModel store = new StoreViewModel();
+                store.Id = reposStore.Id;
+                store.CompanyId = reposStore.CompanyId;
+                store.Name = reposStore.Name;
+                store.Address = reposStore.Address;
+                store.City = reposStore.City;
+                store.Zip = reposStore.Zip;
+                store.Country = reposStore.Country;
+                store.Longitude = reposStore.Longitude;
+                store.Latitude = reposStore.Latitude;
+                return store;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
         }
     }
 }

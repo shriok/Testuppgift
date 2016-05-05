@@ -32,6 +32,29 @@ namespace Repository.Repositories
         }
 
         /// <summary>
+        /// Returns Repository.Stores entity object
+        /// </summary>
+        /// <param name="storeId">Id of Repository.Stores entity object to return</param>
+        /// <returns>Returns Repository.Stores entity object</returns>
+        public static Repository.Stores Get(Guid storeId)
+        {
+            try
+            {
+                Repository.Stores store = new Repository.Stores();
+                using (var db = new CompaniesDBEntities())
+                {
+                    store = db.Stores.Find(storeId);
+                }
+                    return store;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+
+        /// <summary>
         /// Adds a new Store to database
         /// </summary>
         /// <param name="NewStore">Store object to add</param>

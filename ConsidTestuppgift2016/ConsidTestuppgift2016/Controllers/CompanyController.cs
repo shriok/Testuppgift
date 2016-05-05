@@ -9,7 +9,8 @@ namespace ConsidTestuppgift2016.Controllers
 {
     public class CompanyController : Controller
     {
-        // GET: Company
+        // GET: Company/Home
+        //TODO
         public ActionResult Home()
         {            
             CompanyHomeViewModel company = new CompanyHomeViewModel();
@@ -17,12 +18,13 @@ namespace ConsidTestuppgift2016.Controllers
             return View(company);
         }
 
+        // GET: Company/DeleteCompany
         public ActionResult DeleteCompany()
-        {
-            string companyId = RouteData.Values["id"].ToString();
+        {            
             try
             {
-                Service.Services.CompanyServices.Delete(companyId);
+                string companyId = RouteData.Values["id"].ToString();
+                Service.Services.CompanyServices.Delete(new Guid(companyId));
             }
             catch (Exception)
             {
@@ -31,18 +33,57 @@ namespace ConsidTestuppgift2016.Controllers
             return RedirectToAction("Home");
         }
 
+        // GET: Company/EditCompany
         public ActionResult EditCompany()
         {
-            string compId;
-            Service.Services.CompanyServices.Edit(compId);
-            return View();
+            try
+            {
+                string companyId = RouteData.Values["id"].ToString();
+                Company company = Service.Services.CompanyServices.Get(new Guid(companyId));
+                return View(company);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Home");
+            }
+            
         }
 
+        // Post: Company/EditCompany
+        [HttpPost]
+        public ActionResult EditCompany(Company updatedComp)
+        {
+            try
+            {
+                Service.Services.CompanyServices.Update(updatedComp);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return RedirectToAction("Home");
+        }
+
+        // GET: Company/AddCompany
         public ActionResult AddCompany()
         {
-            Company company = new Company();
-            Service.Services.CompanyServices.Add(company);
-            return View();
+            return View(new Company());
+        }
+
+        // Post: Company/AddCompany
+        [HttpPost]
+        public ActionResult AddCompany(Company company)
+        {
+            try
+            {
+                Service.Services.CompanyServices.Add(company);
+                return RedirectToAction("Home");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Home");
+            }
+            
         }
     }
 }

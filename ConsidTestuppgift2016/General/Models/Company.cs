@@ -8,7 +8,7 @@ namespace General.Models
 {
     public class Company
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public int OrganizationNumber { get; set; }
         public string Notes { get; set; }

@@ -9,17 +9,40 @@ namespace Repository.Repositories
     public class CompanyRepository
     {
         /// <summary>
-        /// Gets ALL rows in table
+        /// Gets ALL rows in table Companies
         /// </summary>
         /// <returns>Returns a list of ALL Repository.Companies</returns>
         public static List<Repository.Companies> List()
         {
-            List<Repository.Companies> comp = new List<Repository.Companies>();
+            List<Repository.Companies> LCompany = new List<Repository.Companies>();
             using (var db = new CompaniesDBEntities())
             {
-                comp.AddRange(db.Companies.ToList());
+                LCompany.AddRange(db.Companies.ToList());
             }
-            return comp;
+            return LCompany;
+        }
+
+        /// <summary>
+        /// Gets Repository.company with Id = CompanyID (Guid)
+        /// </summary>
+        /// <param name="companyId">Id of Repository.Company to get (Guid)</param>
+        /// <returns>Returns Repository.Company with id = CompanyID (Guid)</returns>
+        public static Repository.Companies Get(Guid companyId)
+        {
+            try
+            {
+                Repository.Companies company = new Repository.Companies();
+                using (var db = new CompaniesDBEntities())
+                {
+                    db.Companies.Find(companyId);
+                }
+                return company;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
         }
 
         /// <summary>
