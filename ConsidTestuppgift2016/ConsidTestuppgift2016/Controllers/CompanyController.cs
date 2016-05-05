@@ -18,7 +18,8 @@ namespace ConsidTestuppgift2016.Controllers
             return View(company);
         }
 
-        // GET: Company/DeleteCompany
+        // DELETE: Company/DeleteCompany
+        [HttpDelete]
         public ActionResult DeleteCompany()
         {            
             try
@@ -49,7 +50,7 @@ namespace ConsidTestuppgift2016.Controllers
             
         }
 
-        // Post: Company/EditCompany
+        // POST: Company/EditCompany
         [HttpPost]
         public ActionResult EditCompany(Company updatedComp)
         {
@@ -70,7 +71,7 @@ namespace ConsidTestuppgift2016.Controllers
             return View(new Company());
         }
 
-        // Post: Company/AddCompany
+        // POST: Company/AddCompany
         [HttpPost]
         public ActionResult AddCompany(Company company)
         {

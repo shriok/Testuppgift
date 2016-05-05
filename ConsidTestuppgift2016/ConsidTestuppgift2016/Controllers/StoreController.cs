@@ -9,12 +9,14 @@ namespace ConsidTestuppgift2016.Controllers
 {
     public class StoreController : Controller
     {
-        // GET: Store
+        // GET: Store/AddStore
         public ActionResult AddStore()
         {
             return View(new StoreViewModel());
         }
 
+        // POST: Store/AddStore
+        [HttpPost]
         public ActionResult AddStore(StoreViewModel store)
         {
             try
@@ -29,6 +31,7 @@ namespace ConsidTestuppgift2016.Controllers
             
         }
 
+        // GET: Store/EditStore
         public ActionResult EditStore()
         {
             try
@@ -43,6 +46,8 @@ namespace ConsidTestuppgift2016.Controllers
             }            
         }
 
+        // POST: Store/EditStore
+        [HttpPost]
         public ActionResult EditStore(StoreViewModel store)
         {
             try
@@ -57,6 +62,8 @@ namespace ConsidTestuppgift2016.Controllers
             
         }
 
+        // DELETE: Store/DeleteStore
+        [HttpDelete]
         public ActionResult DeleteStore()
         {
             return RedirectToAction("Home", "Company");

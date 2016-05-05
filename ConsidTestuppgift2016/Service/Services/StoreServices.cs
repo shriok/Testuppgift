@@ -75,5 +75,19 @@ namespace Service.Services
                 throw e;
             }
         }
+
+        public static List<StoreViewModel> List(Guid companyId)
+        {
+            try
+            {
+                List<StoreViewModel> LStore = CustomMapper.MapTo.Stores(Repository.Repositories.StoreRepository.List(companyId));
+                return LStore;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
     }
 }

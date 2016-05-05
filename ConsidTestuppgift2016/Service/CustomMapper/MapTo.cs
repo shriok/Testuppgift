@@ -84,6 +84,28 @@ namespace Service.CustomMapper
         }
 
         /// <summary>
+        /// Maps a List of repository stores entity objects to a list of general.model storeviewmodel objects
+        /// </summary>
+        /// <param name="LResosStore">List of repository stores entity objects</param>
+        /// <returns>List of general.model storeviewmodel objects</returns>
+        public static List<StoreViewModel> Stores(List<Repository.Stores> LResosStore)
+        {
+            try
+            {
+                List<StoreViewModel> LStore = new List<StoreViewModel>();
+                foreach (Repository.Stores reposStore in LResosStore)
+                {
+                    LStore.Add(Store(reposStore));
+                }
+                return LStore;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }           
+        }
+
+        /// <summary>
         /// Mapps a StoreViewModel object to a repository store entity object
         /// </summary>
         /// <param name="store">StoreViewModel object</param>
