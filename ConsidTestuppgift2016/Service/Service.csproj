@@ -41,6 +41,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CompanieServices.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\General\General.csproj">
+      <Project>{4233278d-0534-453a-9b1b-0f93f7126320}</Project>
+      <Name>General</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Repository\Repository.csproj">
+      <Project>{429aee7e-ae76-43e2-b61d-988545bf00f9}</Project>
+      <Name>Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
