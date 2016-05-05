@@ -70,7 +70,7 @@
       <DependentUpon>CompaniesDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\CompanieRepository.cs" />
+    <Compile Include="Repositories\CompanyRepository.cs" />
     <Compile Include="Stores.cs">
       <DependentUpon>CompaniesDB.tt</DependentUpon>
     </Compile>

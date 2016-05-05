@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace General.Models
 {
-    public class Companie
+    public class Company
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public int OrganizationNumber { get; set; }
         public string Notes { get; set; }

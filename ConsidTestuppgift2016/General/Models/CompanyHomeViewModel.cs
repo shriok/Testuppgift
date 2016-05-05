@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace General.Models
 {
-    public class CompanieHomeViewModel
+    public class CompanyHomeViewModel
     {
-        public List<Companie> companie { get; set; }
+        public List<Company> company { get; set; }
     }
 }
