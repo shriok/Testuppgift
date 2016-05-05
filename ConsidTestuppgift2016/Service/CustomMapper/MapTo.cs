@@ -21,7 +21,19 @@ namespace Service.CustomMapper
             return comp;
         }
 
-        public static List<Company> companies (List<Repository.Companies> compToMap)
+        public static Repository.Companies Company(Company c)
+        {
+            Repository.Companies comp = new Repository.Companies
+            {
+                Id = new Guid(c.Id),
+                Name = c.Name,
+                Notes = c.Notes,
+                OrganizationNumber = c.OrganizationNumber
+            };
+            return comp;
+        }
+
+        public static List<Company> Companies (List<Repository.Companies> compToMap)
         {
             List<Company> LComp = new List<Company>();
 

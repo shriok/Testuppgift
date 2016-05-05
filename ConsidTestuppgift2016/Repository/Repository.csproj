@@ -71,6 +71,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CompanyRepository.cs" />
+    <Compile Include="Repositories\StoreRepository.cs" />
     <Compile Include="Stores.cs">
       <DependentUpon>CompaniesDB.tt</DependentUpon>
     </Compile>

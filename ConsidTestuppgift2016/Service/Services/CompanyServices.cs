@@ -12,7 +12,7 @@ namespace Service.Services
         public static List<Company> List()
         {
             List<Company> LComp = new List<Company>();
-            LComp.AddRange(CustomMapper.MapTo.companies(Repository.Repositories.CompanyRepository.List()));
+            LComp.AddRange(CustomMapper.MapTo.Companies(Repository.Repositories.CompanyRepository.List()));
             return LComp;
         }
 
@@ -27,5 +27,12 @@ namespace Service.Services
                 throw e;
             }
         }
+
+        public static void Add(Company company)
+        {
+            Repository.Repositories.CompanyRepository.Add(CustomMapper.MapTo.Company(company));
+        }
+
+        public static void Update() { }
     }
 }

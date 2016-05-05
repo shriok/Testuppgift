@@ -29,7 +29,20 @@ namespace ConsidTestuppgift2016.Controllers
                 ViewBag.result = "Error Could not delete Company";
             }
             return RedirectToAction("Home");
+        }
 
+        public ActionResult EditCompany()
+        {
+            string compId;
+            Service.Services.CompanyServices.Edit(compId);
+            return View();
+        }
+
+        public ActionResult AddCompany()
+        {
+            Company company = new Company();
+            Service.Services.CompanyServices.Add(company);
+            return View();
         }
     }
 }
