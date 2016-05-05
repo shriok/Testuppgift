@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace ConsidTestuppgift2016.Controllers
 {
-    public class StorieController : Controller
+    public class StoreController : Controller
     {
-        // GET: Storie
+        // GET: Store
         public ActionResult Index()
         {
             return View();
