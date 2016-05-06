@@ -3,6 +3,39 @@
     ViewBag.Title = "Home";
 }
 
-
-<h2>fungera @ViewBag.result</h2>
+<div>
+    Company
+    <span>
+        @Html.DropDownListFor(model => model.companyName, new SelectList(Model.companyName))
+    </span>
+    </div>
+<table>
+    @foreach (General.Models.StoreViewModel store in Model.lStore)
+    {
+        <tr>
+            <td>
+                @store.name
+            </td>
+            <td>
+                @store.country
+            </td>
+            <td>
+                @store.address
+            </td>
+            <td>
+                @store.city
+            </td>
+            <td>
+                @store.zip
+            </td>
+            <td>
+                @Html.ActionLink(@"edit", "EditStore/" + @store.id, "store")
+            </td>
+            <td>
+                @Html.ActionLink(@"delete", "DeleteBook/" + @store.id, "store")
+            </td>
+        </tr>
+    }
+</table>
+<h2></h2>
 

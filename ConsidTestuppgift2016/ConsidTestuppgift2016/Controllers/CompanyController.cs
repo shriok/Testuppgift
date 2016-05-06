@@ -13,9 +13,15 @@ namespace ConsidTestuppgift2016.Controllers
         //TODO
         public ActionResult Home()
         {            
-            CompanyHomeViewModel company = new CompanyHomeViewModel();
-            company.company = Service.Services.CompanyServices.List();
-            return View(company);
+            CompanyHomeViewModel companyHomeViewModel = new CompanyHomeViewModel();
+            companyHomeViewModel.lCompany = Service.Services.CompanyServices.List().OrderBy(o=>o.name).ToList();
+            companyHomeViewModel.companyName = new List<string>();
+            foreach (Company company in companyHomeViewModel.lCompany)
+            {
+                companyHomeViewModel.companyName.Add(company.name);
+                company.lStore = Service.Services.StoreServices.List(company.id).OrderBy(o => o.name).ToList();                 
+            }
+            return View(companyHomeViewModel);            
         }
 
         // DELETE: Company/DeleteCompany

@@ -8,9 +8,11 @@ namespace General.Models
 {
     public class Company
     {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public int OrganizationNumber { get; set; }
-        public string Notes { get; set; }
+        public Guid id { get; set; }
+        public string name { get; set; }
+        public int organizationNumber { get; set; }
+        public string notes { get; set; }
+
+        public List<StoreViewModel> lStore { get; set; }
     }
 }

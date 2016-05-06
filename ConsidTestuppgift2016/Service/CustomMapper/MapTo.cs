@@ -20,10 +20,10 @@ namespace Service.CustomMapper
             {
                 Company comp = new Company
                 {
-                    Id = repCompany.Id,
-                    Name = repCompany.Name,
-                    Notes = repCompany.Notes,
-                    OrganizationNumber = repCompany.OrganizationNumber
+                    id = repCompany.Id,
+                    name = repCompany.Name,
+                    notes = repCompany.Notes,
+                    organizationNumber = repCompany.OrganizationNumber
                 };
                 return comp;
             }
@@ -45,10 +45,10 @@ namespace Service.CustomMapper
             {
                 Repository.Companies comp = new Repository.Companies
                 {
-                    Id = modelCompany.Id,
-                    Name = modelCompany.Name,
-                    Notes = modelCompany.Notes,
-                    OrganizationNumber = modelCompany.OrganizationNumber
+                    Id = modelCompany.id,
+                    Name = modelCompany.name,
+                    Notes = modelCompany.notes,
+                    OrganizationNumber = modelCompany.organizationNumber
                 };
                 return comp;
             }
@@ -115,15 +115,15 @@ namespace Service.CustomMapper
             try
             {
                 Repository.Stores reposStore = new Repository.Stores();
-                reposStore.Id = store.Id;
-                reposStore.CompanyId = store.CompanyId;
-                reposStore.Name = store.Name;
-                reposStore.Address = store.Address;
-                reposStore.City = store.City;
-                reposStore.Zip = store.Zip;
-                reposStore.Country = store.Country;
-                reposStore.Longitude = store.Longitude;
-                reposStore.Latitude = store.Latitude;
+                reposStore.Id = store.id;
+                reposStore.CompanyId = store.companyId;
+                reposStore.Name = store.name;
+                reposStore.Address = store.address;
+                reposStore.City = store.city;
+                reposStore.Zip = store.zip;
+                reposStore.Country = store.country;
+                reposStore.Longitude = store.longitude;
+                reposStore.Latitude = store.latitude;
                 return reposStore;
             }
             catch (Exception e)
@@ -143,15 +143,15 @@ namespace Service.CustomMapper
             try
             {
                 StoreViewModel store = new StoreViewModel();
-                store.Id = reposStore.Id;
-                store.CompanyId = reposStore.CompanyId;
-                store.Name = reposStore.Name;
-                store.Address = reposStore.Address;
-                store.City = reposStore.City;
-                store.Zip = reposStore.Zip;
-                store.Country = reposStore.Country;
-                store.Longitude = reposStore.Longitude;
-                store.Latitude = reposStore.Latitude;
+                store.id = reposStore.Id;
+                store.companyId = reposStore.CompanyId;
+                store.name = reposStore.Name;
+                store.address = reposStore.Address;
+                store.city = reposStore.City;
+                store.zip = reposStore.Zip;
+                store.country = reposStore.Country;
+                store.longitude = reposStore.Longitude;
+                store.latitude = reposStore.Latitude;
                 return store;
             }
             catch (Exception e)
