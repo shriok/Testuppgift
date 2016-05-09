@@ -8,10 +8,8 @@ namespace General.Models
 {
     public class StoreViewModel
     {
-        public StoreViewModel(List<Store> ls)
-        {
-            lStore = ls;
-        }
-        List<Store> lStore { get; set; }
+        public List<Company> lCompany { get; set; }
+        public Store store { get; set; }
+        public Company selectetCompany { get; set; }
     }
 }

@@ -5,7 +5,8 @@
 
 <section>
     <h1>Company</h1>
-    <div>@Html.ActionLink(@"Add", "AddCompany/")</div>
+    <div>@Html.ActionLink(@"Add a new company", "AddCompany/")</div>
+    <div>@Html.ActionLink(@"Add a new Store", "AddStore/", "Store")</div>
     @foreach (General.Models.Company company in Model.lCompany)
     {
         <div id="multiColumn" class="LeftAlignInside col-lg-6 divStyle">

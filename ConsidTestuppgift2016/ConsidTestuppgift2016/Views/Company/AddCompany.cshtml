@@ -16,19 +16,21 @@
         <div>
             Name:
             <div>
-                @Html.TextBoxFor(model => model.name, new { @class = "textBox" })
+                @Html.TextBoxFor(model => model.name, new { @class = "textBox", @required = "required", @type = "text", @maxlength = "50" })
+                @Html.ValidationMessageFor(model => model.name)
             </div>
         </div>
         <div>
             OrganizationNumber:
             <div>
-                @Html.TextBoxFor(model => model.organizationNumber, new { @class = "textBox" })
+                @Html.TextBoxFor(model => model.organizationNumber, new { @class = "textBox", @required = "required", @type = "number", @maxlength = "5" })
+                @Html.ValidationMessageFor(model => model.organizationNumber)
             </div>
         </div>
         <div>
             Note:
             <div>
-                @Html.TextBoxFor(model => model.notes, new { @class = "textBoxWide" })
+                @Html.TextBoxFor(model => model.notes, new { @class = "textBoxWide"})
             </div>
         </div>
         <input type="submit" value="Add" />

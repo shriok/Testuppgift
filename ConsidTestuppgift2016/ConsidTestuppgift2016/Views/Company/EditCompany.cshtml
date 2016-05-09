@@ -16,13 +16,13 @@
         <div>
             Name:
             <div>
-                @Html.TextBoxFor(model => model.name, Model.name, new { @class = "textBox" })
+                @Html.TextBoxFor(model => model.name, Model.name, new { @class = "textBox", @required = "required", @type = "text", @maxlength = "50" })
             </div>
         </div>
         <div>
             OrganizationNumber:
             <div>
-                @Html.TextBoxFor(model => model.organizationNumber, Model.organizationNumber, new { @class = "textBox" })
+                @Html.TextBoxFor(model => model.organizationNumber, Model.organizationNumber, new { @class = "textBox", @required = "required", @type = "number" })
             </div>
         </div>
         <div>

@@ -1,0 +1,53 @@
+﻿@model General.Models.StoreHomeViewModel
+@{
+    ViewBag.Title = "Home";
+}
+
+<section>
+    <h1>Stores</h1>
+    <div>@Html.ActionLink(@"Add a new company", "AddCompany/", "Company")</div>
+    <div>@Html.ActionLink(@"Add a new Store", "AddStore/")</div>
+    <div id="multiColumn" class="LeftAlignInside col-lg-6 divStyle">
+        <div class="LeftColumn">
+                 @Model.company.name
+            <div>@Model.company.organizationNumber</div>
+            <div>@Model.company.notes</div>
+        </div>
+    </div>
+    <div id="multiColumn" class="LeftAlignInside col-lg-7 divStyle">
+        @foreach (General.Models.Store store in Model.lStore)
+        {
+            <div id="multiColumn" class="LeftAlignInside col-lg-6 divStyle">
+                <div class="LeftColumn">@store.name                    
+                    <div>@store.address</div>
+                    <div>@store.city</div>
+                    <div>@store.zip</div>
+                    <div>@store.country</div>
+                    <div>@store.longitude</div>
+                    <div>@store.latitude</div>
+                </div>
+                <div class="RightColumn">
+                    <div>@Html.ActionLink(@"Edit", "EditStore/" + @store.id)</div>
+                    <div>@Html.ActionLink(@"Delete", "DeleteStore", store)</div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

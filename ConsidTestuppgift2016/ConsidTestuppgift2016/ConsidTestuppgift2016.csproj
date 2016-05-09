@@ -204,6 +204,8 @@
     <Content Include="Views\Company\EditCompany.cshtml" />
     <Content Include="Views\Company\AddCompany.cshtml" />
     <Content Include="Views\Store\EditStore.cshtml" />
+    <Content Include="Views\Store\AddStore.cshtml" />
+    <Content Include="Views\Store\Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

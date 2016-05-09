@@ -30,11 +30,11 @@ namespace Service.Services
         /// </summary>
         /// <param name="storeId">id of store to return</param>
         /// <returns>Returns store with id = storeId</returns>
-        public static Store Get(Guid storeId)
+        public static Store Get(Guid companyId)
         {
             try
             {
-                Store store = CustomMapper.MapTo.Store(Repository.Repositories.StoreRepository.Get(storeId));
+                Store store = CustomMapper.MapTo.Store(Repository.Repositories.StoreRepository.Get(companyId));
                 return store;
             }
             catch (Exception e)

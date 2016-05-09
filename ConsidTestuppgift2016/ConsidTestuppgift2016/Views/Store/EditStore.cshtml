@@ -1,8 +1,68 @@
 ﻿@model General.Models.StoreViewModel
+
 @{
     ViewBag.Title = "EditStore";
 }
+<section>
+    @using (Html.BeginForm("EditStore", "Store", FormMethod.Post))
+    {
+        <div>
+            <span hidden>
+                Name: Guid
+                @Html.TextBoxFor(model => model.store.id, Model.store.id)
+            </span>
+        </div>
+        <div>
+            <h3>Company:</h3>
+            <span>
+                @Html.DropDownListFor(model => model.store.companyId, new SelectList(Model.lCompany, "id", "Name"), Model.selectetCompany.name)
+            </span>
+        </div>
+        <div class="divStyleTop">
+            Store name:
+            <div>
+                @Html.TextBoxFor(model => model.store.name, Model.store.name, new { @class = "textBox", @required = "required", InputType = "text" })
+            </div>
+        </div>
+        <div>
+            Address:
+            <div>
+                @Html.TextBoxFor(model => model.store.address, Model.store.address, new { @class = "textBox" })
+            </div>
+        </div>
+        <div>
+            City:
+            <div>
+                @Html.TextBoxFor(model => model.store.city, Model.store.city, new { @class = "textBoxWide" })
+            </div>
+        </div>
+        <div>
+            Zip:
+            <div>
+                @Html.TextBoxFor(model => model.store.zip, Model.store.zip, new { @class = "textBoxWide" })
+            </div>
+        </div>
+        <div>
+            Country:
+            <div>
+                @Html.TextBoxFor(model => model.store.country, Model.store.country, new { @class = "textBoxWide" })
+            </div>
+        </div>
+        <div>
+            Longitude:
+            <div>
+                @Html.TextBoxFor(model => model.store.longitude, Model.store.longitude, new { @class = "textBoxWide" })
+            </div>
+        </div>
+        <div>
+            Latitude:
+            <div>
+                @Html.TextBoxFor(model => model.store.latitude, Model.store.latitude, new { @class = "textBoxWide" })
+            </div>
+        </div>
+        <input type="submit" value="Update" />
+    }
+    <div>@Html.ActionLink("Cancel", "Home")</div>
+    @ViewBag.result
 
-
-<h2>EditStore</h2>
-
+</section>

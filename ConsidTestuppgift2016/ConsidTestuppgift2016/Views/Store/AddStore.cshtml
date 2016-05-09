@@ -1,0 +1,62 @@
+﻿@model General.Models.StoreViewModel
+
+@{
+    ViewBag.Title = "AddStore";
+}
+<section>
+    @using (Html.BeginForm("AddStore", "Store", FormMethod.Post))
+    {
+        <div>
+            Name:
+            <span>
+                @Html.DropDownListFor(model => model.store.companyId, new SelectList(Model.lCompany, "id", "Name"))
+            </span>
+        </div>
+        <div>
+            Name:
+            <div>
+                @Html.TextBoxFor(model => model.store.name, new { @class = "textBox" })
+            </div>
+        </div>
+        <div>
+            Address:
+            <div>
+                @Html.TextBoxFor(model => model.store.address, new { @class = "textBox" })
+            </div>
+        </div>
+        <div>
+            City:
+            <div>
+                @Html.TextBoxFor(model => model.store.city, new { @class = "textBoxWide" })
+            </div>
+        </div>
+        <div>
+            Zip:
+            <div>
+                @Html.TextBoxFor(model => model.store.zip, new { @class = "textBoxWide" })
+            </div>
+        </div>
+        <div>
+            Country:
+            <div>
+                @Html.TextBoxFor(model => model.store.country, new { @class = "textBoxWide" })
+            </div>
+        </div>
+        <div>
+            Longitude:
+            <div>
+                @Html.TextBoxFor(model => model.store.longitude, new { @class = "textBoxWide" })
+            </div>
+        </div>
+        <div>
+            Latitude:
+            <div>
+                @Html.TextBoxFor(model => model.store.latitude, new { @class = "textBoxWide" })
+            </div>
+        </div>
+        <input type="submit" value="Add" />
+    }
+    <div>@Html.ActionLink("Cancel", "Home")</div>
+    @ViewBag.result
+
+</section>

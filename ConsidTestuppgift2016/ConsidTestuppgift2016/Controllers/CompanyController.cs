@@ -14,13 +14,7 @@ namespace ConsidTestuppgift2016.Controllers
         public ActionResult Home()
         {            
             CompanyHomeViewModel companyHomeViewModel = new CompanyHomeViewModel();
-            companyHomeViewModel.lCompany = Service.Services.CompanyServices.List().OrderBy(o=>o.name).ToList();
-            //companyHomeViewModel.companyName = new List<string>();
-            //foreach (Company company in companyHomeViewModel.lCompany)
-            //{
-            //    companyHomeViewModel.companyName.Add(company.name);
-            //    company.lStore = Service.Services.StoreServices.List(company.id).OrderBy(o => o.name).ToList();                 
-            //}
+            companyHomeViewModel.lCompany = Service.Services.CompanyServices.List().OrderBy(o=>o.name).ToList();            
             return View(companyHomeViewModel);            
         }
 
@@ -81,9 +75,21 @@ namespace ConsidTestuppgift2016.Controllers
         {
             try
             {
-                company.id = Guid.NewGuid();
-                Service.Services.CompanyServices.Add(company);
-                return RedirectToAction("Home");
+                if (string.IsNullOrEmpty(company.name))
+                {
+                    ModelState.AddModelError("Name is Required", "");
+                }
+                if (string.IsNullOrEmpty(company.organizationNumber))
+                {
+                    ModelState.AddModelError("", "Name is Required");
+                }
+                if (ModelState.IsValid)
+                {
+                    company.id = Guid.NewGuid();
+                    Service.Services.CompanyServices.Add(company);
+                    return RedirectToAction("Home");
+                }
+                return View();
             }
             catch (Exception)
             {

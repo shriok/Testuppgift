@@ -44,7 +44,9 @@ textarea {
 .LeftColumn {
     width: 40vw;
 }
-
+.divStyleTop {
+    margin-top :20px;
+}
 .divStyle {
     margin-bottom :30px;
 }
