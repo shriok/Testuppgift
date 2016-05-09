@@ -22,3 +22,48 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.MultiColumn {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 30px 10px;
+}
+
+.MultiColumn .MultiColumn {
+    border-spacing: 10px 0;
+}
+
+.LeftColumn, .RightColumn {
+    display: table-cell;
+}
+
+.RightColumn {
+    width: 40vw;
+}
+
+.LeftColumn {
+    width: 40vw;
+}
+
+.divStyle {
+    margin-bottom :30px;
+}
+
+.LeftAlignInside {
+    display: inline-block;
+    text-align: left;
+}
+
+.RightAlignInside {
+    display: inline-block;
+    text-align: right;
+}
+
+.textBox {
+    border:groove;
+}
+
+.textBoxWide {
+    width: 500px;
+    border:groove;
+}

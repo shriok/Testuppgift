@@ -1,7 +1,39 @@
-﻿
+﻿@model General.Models.Company
 @{
     ViewBag.Title = "EditCompany";
 }
 
-<h2>EditCompany</h2>
 
+<section>
+    @using (Html.BeginForm("EditCompany", "Company", FormMethod.Post))
+    {
+        <div>
+            <span hidden>
+                Name: Guid
+                @Html.TextBoxFor(model => model.id, Model.id)
+            </span>
+        </div>
+        <div>
+            Name:
+            <div>
+                @Html.TextBoxFor(model => model.name, Model.name, new { @class = "textBox" })
+            </div>
+        </div>
+        <div>
+            OrganizationNumber:
+            <div>
+                @Html.TextBoxFor(model => model.organizationNumber, Model.organizationNumber, new { @class = "textBox" })
+            </div>
+        </div>
+        <div>
+            Note:
+            <div>
+                @Html.TextBoxFor(model => model.notes, Model.notes, new { @class= "textBoxWide"})
+            </div>
+        </div>       
+        <input type="submit" value="Update" />
+    }
+    <div>@Html.ActionLink("Cancel", "Home")</div>
+    @ViewBag.result
+
+</section>

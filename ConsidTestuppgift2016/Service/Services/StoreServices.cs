@@ -13,7 +13,7 @@ namespace Service.Services
         /// Adds a new Store to database
         /// </summary>
         /// <param name="store">New storeViewModel to add</param>
-        public static void Add(StoreViewModel store)
+        public static void Add(Store store)
         {
             try
             {
@@ -30,11 +30,11 @@ namespace Service.Services
         /// </summary>
         /// <param name="storeId">id of store to return</param>
         /// <returns>Returns store with id = storeId</returns>
-        public static StoreViewModel Get(Guid storeId)
+        public static Store Get(Guid storeId)
         {
             try
             {
-                StoreViewModel store = CustomMapper.MapTo.Store(Repository.Repositories.StoreRepository.Get(storeId));
+                Store store = CustomMapper.MapTo.Store(Repository.Repositories.StoreRepository.Get(storeId));
                 return store;
             }
             catch (Exception e)
@@ -47,7 +47,7 @@ namespace Service.Services
         /// Updates a view model with id store.id
         /// </summary>
         /// <param name="store">The updated Store</param>
-        public static void update(StoreViewModel store)
+        public static void update(Store store)
         {
             try
             {
@@ -76,11 +76,11 @@ namespace Service.Services
             }
         }
 
-        public static List<StoreViewModel> List(Guid companyId)
+        public static List<Store> List(Guid companyId)
         {
             try
             {
-                List<StoreViewModel> LStore = CustomMapper.MapTo.Stores(Repository.Repositories.StoreRepository.List(companyId));
+                List<Store> LStore = CustomMapper.MapTo.Stores(Repository.Repositories.StoreRepository.List(companyId));
                 return LStore;
             }
             catch (Exception e)

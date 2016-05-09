@@ -8,7 +8,10 @@ namespace General.Models
 {
     public class CompanyHomeViewModel
     {
-        public List<string> companyName { get; set; }
+        
+
+
+        //public List<string> companyName { get; set; }
         public List<Company> lCompany { get; set; }
     }
 }

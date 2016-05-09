@@ -8,14 +8,10 @@ namespace General.Models
 {
     public class StoreViewModel
     {
-        public Guid id { get; set; }
-        public Guid companyId { get; set; }
-        public string name { get; set; }
-        public string address { get; set; }
-        public string city { get; set; }
-        public string zip { get; set; }
-        public string country { get; set; }
-        public string longitude { get; set; }
-        public string latitude { get; set; }
+        public StoreViewModel(List<Store> ls)
+        {
+            lStore = ls;
+        }
+        List<Store> lStore { get; set; }
     }
 }

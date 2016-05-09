@@ -3,39 +3,23 @@
     ViewBag.Title = "Home";
 }
 
-<div>
-    Company
-    <span>
-        @Html.DropDownListFor(model => model.companyName, new SelectList(Model.companyName))
-    </span>
-    </div>
-<table>
-    @foreach (General.Models.StoreViewModel store in Model.lStore)
+<section>
+    <h1>Company</h1>
+    <div>@Html.ActionLink(@"Add", "AddCompany/")</div>
+    @foreach (General.Models.Company company in Model.lCompany)
     {
-        <tr>
-            <td>
-                @store.name
-            </td>
-            <td>
-                @store.country
-            </td>
-            <td>
-                @store.address
-            </td>
-            <td>
-                @store.city
-            </td>
-            <td>
-                @store.zip
-            </td>
-            <td>
-                @Html.ActionLink(@"edit", "EditStore/" + @store.id, "store")
-            </td>
-            <td>
-                @Html.ActionLink(@"delete", "DeleteBook/" + @store.id, "store")
-            </td>
-        </tr>
+        <div id="multiColumn" class="LeftAlignInside col-lg-6 divStyle">
+            <div class="LeftColumn">
+                @Html.ActionLink(@company.name, "Home/" + @company.id, "Store")
+                <div>@company.organizationNumber</div> 
+                <div>@company.notes</div>
+            </div>
+            <div class="RightColumn">
+                <div>@Html.ActionLink(@"Edit", "EditCompany/" + @company.id)</div>
+                <div>@Html.ActionLink(@"Delete", "DeleteCompany/" + @company.id)</div>                    
+            </div>
+        </div>
     }
-</table>
-<h2></h2>
+</section>
+
 

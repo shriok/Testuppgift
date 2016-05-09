@@ -34,7 +34,7 @@ namespace Repository.Repositories
                 Repository.Companies company = new Repository.Companies();
                 using (var db = new CompaniesDBEntities())
                 {
-                    db.Companies.Find(companyId);
+                    company = db.Companies.Find(companyId);
                 }
                 return company;
             }

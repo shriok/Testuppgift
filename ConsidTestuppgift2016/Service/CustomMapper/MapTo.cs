@@ -23,7 +23,7 @@ namespace Service.CustomMapper
                     id = repCompany.Id,
                     name = repCompany.Name,
                     notes = repCompany.Notes,
-                    organizationNumber = repCompany.OrganizationNumber
+                    organizationNumber = repCompany.OrganizationNumber.ToString()
                 };
                 return comp;
             }
@@ -48,7 +48,7 @@ namespace Service.CustomMapper
                     Id = modelCompany.id,
                     Name = modelCompany.name,
                     Notes = modelCompany.notes,
-                    OrganizationNumber = modelCompany.organizationNumber
+                    OrganizationNumber = Convert.ToInt32(modelCompany.organizationNumber)
                 };
                 return comp;
             }
@@ -88,11 +88,11 @@ namespace Service.CustomMapper
         /// </summary>
         /// <param name="LResosStore">List of repository stores entity objects</param>
         /// <returns>List of general.model storeviewmodel objects</returns>
-        public static List<StoreViewModel> Stores(List<Repository.Stores> LResosStore)
+        public static List<Store> Stores(List<Repository.Stores> LResosStore)
         {
             try
             {
-                List<StoreViewModel> LStore = new List<StoreViewModel>();
+                List<Store> LStore = new List<Store>();
                 foreach (Repository.Stores reposStore in LResosStore)
                 {
                     LStore.Add(Store(reposStore));
@@ -110,7 +110,7 @@ namespace Service.CustomMapper
         /// </summary>
         /// <param name="store">StoreViewModel object</param>
         /// <returns>repository store entity object</returns>
-        public static Repository.Stores Store(StoreViewModel store)
+        public static Repository.Stores Store(Store store)
         {
             try
             {
@@ -138,11 +138,11 @@ namespace Service.CustomMapper
         /// </summary>
         /// <param name="reposStore">repository store entity object</param>
         /// <returns>StoreViewModel object</returns>
-        public static StoreViewModel Store(Repository.Stores reposStore)
+        public static Store Store(Repository.Stores reposStore)
         {
             try
             {
-                StoreViewModel store = new StoreViewModel();
+                Store store = new Store();
                 store.id = reposStore.Id;
                 store.companyId = reposStore.CompanyId;
                 store.name = reposStore.Name;

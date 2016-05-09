@@ -12,12 +12,19 @@ namespace ConsidTestuppgift2016.Controllers
         // GET: Store/AddStore
         public ActionResult AddStore()
         {
-            return View(new StoreViewModel());
+            return View(new Store());
+        }
+
+        public ActionResult Home()
+        {
+            string companyId = RouteData.Values["id"].ToString();
+            StoreViewModel stores = new StoreViewModel(Service.Services.StoreServices.List(new Guid(companyId)));
+            return View();
         }
 
         // POST: Store/AddStore
         [HttpPost]
-        public ActionResult AddStore(StoreViewModel store)
+        public ActionResult AddStore(Store store)
         {
             try
             {
@@ -37,7 +44,7 @@ namespace ConsidTestuppgift2016.Controllers
             try
             {
                 string storeId = RouteData.Values["id"].ToString();
-                StoreViewModel store = Service.Services.StoreServices.Get(new Guid(storeId));
+                Store store = Service.Services.StoreServices.Get(new Guid(storeId));
                 return View(store);
             }
             catch (Exception)
@@ -48,7 +55,7 @@ namespace ConsidTestuppgift2016.Controllers
 
         // POST: Store/EditStore
         [HttpPost]
-        public ActionResult EditStore(StoreViewModel store)
+        public ActionResult EditStore(Store store)
         {
             try
             {

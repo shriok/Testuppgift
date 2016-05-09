@@ -15,17 +15,16 @@ namespace ConsidTestuppgift2016.Controllers
         {            
             CompanyHomeViewModel companyHomeViewModel = new CompanyHomeViewModel();
             companyHomeViewModel.lCompany = Service.Services.CompanyServices.List().OrderBy(o=>o.name).ToList();
-            companyHomeViewModel.companyName = new List<string>();
-            foreach (Company company in companyHomeViewModel.lCompany)
-            {
-                companyHomeViewModel.companyName.Add(company.name);
-                company.lStore = Service.Services.StoreServices.List(company.id).OrderBy(o => o.name).ToList();                 
-            }
+            //companyHomeViewModel.companyName = new List<string>();
+            //foreach (Company company in companyHomeViewModel.lCompany)
+            //{
+            //    companyHomeViewModel.companyName.Add(company.name);
+            //    company.lStore = Service.Services.StoreServices.List(company.id).OrderBy(o => o.name).ToList();                 
+            //}
             return View(companyHomeViewModel);            
         }
 
         // DELETE: Company/DeleteCompany
-        [HttpDelete]
         public ActionResult DeleteCompany()
         {            
             try
@@ -45,8 +44,7 @@ namespace ConsidTestuppgift2016.Controllers
         {
             try
             {
-                string companyId = RouteData.Values["id"].ToString();
-                Company company = Service.Services.CompanyServices.Get(new Guid(companyId));
+                Company company = Service.Services.CompanyServices.Get(Guid.Parse(RouteData.Values["id"].ToString()));
                 return View(company);
             }
             catch (Exception)
@@ -83,6 +81,7 @@ namespace ConsidTestuppgift2016.Controllers
         {
             try
             {
+                company.id = Guid.NewGuid();
                 Service.Services.CompanyServices.Add(company);
                 return RedirectToAction("Home");
             }

@@ -1,7 +1,39 @@
-﻿
+﻿@model General.Models.Company
 @{
     ViewBag.Title = "AddCompany";
 }
 
-<h2>AddCompany</h2>
 
+<section>
+    @using (Html.BeginForm("AddCompany", "Company", FormMethod.Post))
+    {
+        <div>
+            <span hidden>
+                Name: Guid
+                @Html.TextBoxFor(model => model.id)
+            </span>
+        </div>
+        <div>
+            Name:
+            <div>
+                @Html.TextBoxFor(model => model.name, new { @class = "textBox" })
+            </div>
+        </div>
+        <div>
+            OrganizationNumber:
+            <div>
+                @Html.TextBoxFor(model => model.organizationNumber, new { @class = "textBox" })
+            </div>
+        </div>
+        <div>
+            Note:
+            <div>
+                @Html.TextBoxFor(model => model.notes, new { @class = "textBoxWide" })
+            </div>
+        </div>
+        <input type="submit" value="Add" />
+    }
+    <div>@Html.ActionLink("Cancel", "Home")</div>
+    @ViewBag.result
+
+</section>
