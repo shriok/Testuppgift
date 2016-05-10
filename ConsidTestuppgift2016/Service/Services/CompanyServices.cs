@@ -1,22 +1,61 @@
 ﻿using General.Models;
+using Repository.Repositories;
+using Service.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.ModelBinding;
 
 namespace Service.Services
 {
-    public class CompanyServices
+    public class CompanyServices: ICompanyServices
     {
+        private IValidationDictionary _validatonDictionary;
+        private ICompanyRepository _companyRepository;
+
+        public CompanyServices(IValidationDictionary validationDictionary , ICompanyRepository companyRepository)
+        {
+            _validatonDictionary = validationDictionary;
+            _companyRepository = companyRepository;
+        }
+
+        public bool ValidateCompany(Company companyToValidate)
+        {
+            int n;
+
+            if (companyToValidate.name == null || companyToValidate.name.Trim().Length == 0)                
+            {
+                _validatonDictionary.AddError("Name", "Name is required.");
+            }
+
+            if (companyToValidate.organizationNumber == null || companyToValidate.organizationNumber.Trim().Length == 0)
+            {
+                _validatonDictionary.AddError("organizationNumber", "organizationNumber is required.");
+            }
+                
+            if (companyToValidate.organizationNumber != null && companyToValidate.organizationNumber.Trim().Length > 9)
+            {
+                _validatonDictionary.AddError("organizationNumber", "organizationNumber may not be longer the 9 digits");
+            }
+
+            if (companyToValidate.organizationNumber != null && int.TryParse(companyToValidate.organizationNumber, out n))
+            {
+                _validatonDictionary.AddError("organizationNumber", "May only contain digits");
+            }
+
+            return _validatonDictionary.IsValid;
+        }
+
         /// <summary>
         /// Returns a List of All Companys
         /// </summary>
         /// <returns>Returns a List of All Companys</returns>
-        public static List<Company> List()
+        public List<Company> List()
         {
             List<Company> LComp = new List<Company>();
-            LComp.AddRange(CustomMapper.MapTo.Companies(Repository.Repositories.CompanyRepository.List()));
+            LComp.AddRange(CustomMapper.MapTo.Companies(_companyRepository.List()));
             return LComp;
         }
 
@@ -25,11 +64,11 @@ namespace Service.Services
         /// </summary>
         /// <param name="companyId">Id of company to Get (Guid)</param>
         /// <returns>Returns Company with id = companyId</returns>
-        public static Company Get(Guid companyId)
+        public Company Get(Guid companyId)
         {
             try
             {
-                Company company = CustomMapper.MapTo.Company(Repository.Repositories.CompanyRepository.Get(companyId));
+                Company company = CustomMapper.MapTo.Company(_companyRepository.Get(companyId));
                 return company;
             }
             catch (Exception e)
@@ -43,11 +82,11 @@ namespace Service.Services
         /// Deletes the Company and connected stories
         /// </summary>
         /// <param name="companyId">Id of Company to delete (Guid)</param>
-        public static void Delete(Guid companyId)
+        public void Delete(Guid companyId)
         {
             try
             {
-                Repository.Repositories.CompanyRepository.Delete(companyId);
+                _companyRepository.Delete(companyId);
             }
             catch (Exception e)
             {
@@ -59,33 +98,41 @@ namespace Service.Services
         /// Adds a new company to database
         /// </summary>
         /// <param name="company">Company to add</param>
-        public static void Add(Company company)
+        public bool Add(Company company)
         {
+            if (!ValidateCompany(company))
+            {
+                return false;
+            }
             try
             {
-                Repository.Repositories.CompanyRepository.Add(CustomMapper.MapTo.Company(company));
+                _companyRepository.Add(CustomMapper.MapTo.Company(company));
+                return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-
-                throw e;
+                return false;
             }
-            
         }
 
         /// <summary>
         /// Uppdates a company
         /// </summary>
         /// <param name="company">The updated Company</param>
-        public static void Update(Company company)
+        public bool Update(Company company)
         {
+            if (!ValidateCompany(company))
+            {
+                return false;
+            }
             try
             {
-                Repository.Repositories.CompanyRepository.Update(CustomMapper.MapTo.Company(company));
+                _companyRepository.Update(CustomMapper.MapTo.Company(company));
+                return true;
             }
             catch (Exception e)
             {
-
+                return false;
                 throw e;
             }
         }

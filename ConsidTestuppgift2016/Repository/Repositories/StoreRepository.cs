@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Repository.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Repository.Repositories
 {
-    public class StoreRepository
+    public class StoreRepository: IStoreRepository
     {
         /// <summary>
         /// Returns a list of all stores with foreingKeyId companyId
         /// </summary>
         /// <param name="companyId">id of the company whos stores to return</param>
         /// <returns>A List of Repository.Stores</returns>
-        public static List<Repository.Stores> List(Guid companyId)
+        public List<Repository.Stores> List(Guid companyId)
         {
             try
             {            
@@ -36,7 +37,7 @@ namespace Repository.Repositories
         /// </summary>
         /// <param name="companyId">CompanyId of Repository.Stores entity object to return</param>
         /// <returns>Returns Repository.Stores entity object</returns>
-        public static Repository.Stores Get(Guid storeId)
+        public Repository.Stores Get(Guid storeId)
         {
             try
             {
@@ -59,7 +60,7 @@ namespace Repository.Repositories
         /// Adds a new Store to database
         /// </summary>
         /// <param name="NewStore">Store object to add</param>
-        public static void Add(Stores NewStore)
+        public void Add(Stores NewStore)
         {
             try
             {
@@ -80,7 +81,7 @@ namespace Repository.Repositories
         /// Deletes Store with id storeId
         /// </summary>
         /// <param name="storeId">Id of the store to deltet (Guid)</param>
-        public static void Delete(Guid storeId)
+        public void Delete(Guid storeId)
         {
             try
             {
@@ -103,7 +104,7 @@ namespace Repository.Repositories
         /// Updates Store with id = updatedStore.Id 
         /// </summary>
         /// <param name="updatedStore">Store to update</param>
-        public static void Update(Stores updatedStore)
+        public void Update(Stores updatedStore)
         {
             try
             {

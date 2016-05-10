@@ -11,11 +11,11 @@ namespace General.Models
     {
         [Required]
         public Guid id { get; set; }
-        [Required]
-        [StringLength(30)]
+        [Required(ErrorMessage = "Name is required")]
+        [StringLength(30,ErrorMessage = "Name may not be longer then 30 chars")]
         public string name { get; set; }
-        [Required]
-        [StringLength(10)]
+        [Required(ErrorMessage = "organizationnumber is required")]
+        [StringLength(9, ErrorMessage = "organizationnumber may not be longer then 9 didgits")]
         public string organizationNumber { get; set; }
         public string notes { get; set; }
     }

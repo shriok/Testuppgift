@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\CompanyHomeViewModel.cs" />
-    <Compile Include="Models\ModelService.cs" />
     <Compile Include="Models\Store.cs" />
     <Compile Include="Models\StoreHomeViewModel.cs" />
     <Compile Include="Models\StoreViewModel.cs" />

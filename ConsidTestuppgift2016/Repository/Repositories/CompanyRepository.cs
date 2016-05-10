@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Repository.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace Repository.Repositories
 {
-    public class CompanyRepository
+    public class ICompanyRepository: Interface.ICompanyRepository
     {
+        
         /// <summary>
         /// Gets ALL rows in table Companies
         /// </summary>
         /// <returns>Returns a list of ALL Repository.Companies</returns>
-        public static List<Repository.Companies> List()
+        public List<Repository.Companies> List()
         {
             List<Repository.Companies> LCompany = new List<Repository.Companies>();
             using (var db = new CompaniesDBEntities())
@@ -27,7 +29,7 @@ namespace Repository.Repositories
         /// </summary>
         /// <param name="companyId">Id of Repository.Company to get (Guid)</param>
         /// <returns>Returns Repository.Company with id = CompanyID (Guid)</returns>
-        public static Repository.Companies Get(Guid companyId)
+        public Repository.Companies Get(Guid companyId)
         {
             try
             {
@@ -49,7 +51,7 @@ namespace Repository.Repositories
         /// Deletes Company with id = companyId
         /// </summary>
         /// <param name="companyId">Id of the Company to delete (Guid)</param>
-        public static void Delete(Guid companyId)
+        public void Delete(Guid companyId)
         {
             try
             {           
@@ -72,7 +74,7 @@ namespace Repository.Repositories
         /// Adds a new Company to database
         /// </summary>
         /// <param name="newComp">Company object to add</param>
-        public static void Add(Repository.Companies newComp)
+        public void Add(Repository.Companies newComp)
         {
             try
             {
@@ -93,7 +95,7 @@ namespace Repository.Repositories
         /// Updates Company with id = newComp.Id
         /// </summary>
         /// <param name="updatedComp">Company to update</param>
-        public static void Update(Repository.Companies updatedComp)
+        public void Update(Repository.Companies updatedComp)
         {
             try
             {

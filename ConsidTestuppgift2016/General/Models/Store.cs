@@ -11,21 +11,21 @@ namespace General.Models
     {
 
         public Guid id { get; set; }
-
         public Guid companyId { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Name is required")]
         [StringLength(30)]
         public string name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Address is required")]
         [StringLength(30)]
         public string address { get; set; }
-        [Required]
+        [Required(ErrorMessage = "City is required")]
         [StringLength(30)]
         public string city { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Zip code is required")]
         [StringLength(10)]
         public string zip { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Country is required")]
         [StringLength(30)]
         public string country { get; set; }
 

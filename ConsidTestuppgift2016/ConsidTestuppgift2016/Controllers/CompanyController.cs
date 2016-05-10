@@ -1,20 +1,37 @@
 ﻿using General.Models;
+using Repository.Interface;
+using Repository.Repositories;
+using Service.Interface;
+using Service.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Web.ModelBinding;
 using System.Web.Mvc;
 
 namespace ConsidTestuppgift2016.Controllers
 {
     public class CompanyController : Controller
     {
+        private System.Web.ModelBinding.ModelStateDictionary _modelState;
+        private ICompanyServices _iCompanyServices;
+
+        public CompanyController()
+        {
+            _modelState = new System.Web.ModelBinding.ModelStateDictionary();
+            _iCompanyServices = new CompanyServices(new ModelStateWrapper(_modelState), new Repository.Repositories.ICompanyRepository());
+        }
+
+        public CompanyController(ICompanyServices iCompanyServices)
+        {
+            _iCompanyServices = iCompanyServices;
+        }
+
         // GET: Company/Home
-        //TODO
         public ActionResult Home()
         {            
             CompanyHomeViewModel companyHomeViewModel = new CompanyHomeViewModel();
-            companyHomeViewModel.lCompany = Service.Services.CompanyServices.List().OrderBy(o=>o.name).ToList();            
+            companyHomeViewModel.lCompany = _iCompanyServices.List().OrderBy(o=>o.name).ToList();            
             return View(companyHomeViewModel);            
         }
 
@@ -24,7 +41,7 @@ namespace ConsidTestuppgift2016.Controllers
             try
             {
                 string companyId = RouteData.Values["id"].ToString();
-                Service.Services.CompanyServices.Delete(new Guid(companyId));
+                _iCompanyServices.Delete(new Guid(companyId));
             }
             catch (Exception)
             {
@@ -38,7 +55,7 @@ namespace ConsidTestuppgift2016.Controllers
         {
             try
             {
-                Company company = Service.Services.CompanyServices.Get(Guid.Parse(RouteData.Values["id"].ToString()));
+                Company company = _iCompanyServices.Get(Guid.Parse(RouteData.Values["id"].ToString()));
                 return View(company);
             }
             catch (Exception)
@@ -54,7 +71,10 @@ namespace ConsidTestuppgift2016.Controllers
         {
             try
             {
-                Service.Services.CompanyServices.Update(updatedComp);
+                if (!_iCompanyServices.Update(updatedComp))
+                {
+                    return View();
+                }
             }
             catch (Exception)
             {
@@ -75,21 +95,14 @@ namespace ConsidTestuppgift2016.Controllers
         {
             try
             {
-                if (string.IsNullOrEmpty(company.name))
+                company.id = Guid.NewGuid();
+                if (!_iCompanyServices.Add(company))
                 {
-                    ModelState.AddModelError("Name is Required", "");
-                }
-                if (string.IsNullOrEmpty(company.organizationNumber))
-                {
-                    ModelState.AddModelError("", "Name is Required");
-                }
-                if (ModelState.IsValid)
-                {
-                    company.id = Guid.NewGuid();
-                    Service.Services.CompanyServices.Add(company);
-                    return RedirectToAction("Home");
-                }
-                return View();
+                    return View();
+                }               
+                
+                return RedirectToAction("Home");
+                
             }
             catch (Exception)
             {

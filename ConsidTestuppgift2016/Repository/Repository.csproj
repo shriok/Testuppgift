@@ -69,6 +69,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CompaniesDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Interface\ICompanyRepository.cs" />
+    <Compile Include="Interface\IStoreRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CompanyRepository.cs" />
     <Compile Include="Repositories\StoreRepository.cs" />
