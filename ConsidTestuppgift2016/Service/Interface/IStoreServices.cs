@@ -10,7 +10,8 @@ namespace Service.Interface
     public interface IStoreServices
     {
         /// <summary>
-        /// Adds a new Store to database
+        /// Adds a new Store to database 
+        /// and Async gets location from GoogleMaps API
         /// </summary>
         /// <param name="store">New storeViewModel to add</param>
         void Add(Store store);
@@ -24,6 +25,7 @@ namespace Service.Interface
 
         /// <summary>
         /// Updates a view model with id store.id
+        /// and Async gets location from GoogleMaps API
         /// </summary>
         /// <param name="store">The updated Store</param>
         void update(Store store);
@@ -34,6 +36,11 @@ namespace Service.Interface
         /// <param name="storeId">Id of store to delete (Guid)</param>
         void Delete(Guid storeId);
 
+        /// <summary>
+        /// returns a list of a companys stores
+        /// </summary>
+        /// <param name="companyId">Id of Company (Guid)</param>
+        /// <returns>returns a list of a companys stores</returns>
         List<Store> List(Guid companyId);
     }
 }

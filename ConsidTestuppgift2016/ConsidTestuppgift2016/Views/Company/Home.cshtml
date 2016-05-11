@@ -5,22 +5,24 @@
 
 <section>
     <h1>Company</h1>
-    <div>@Html.ActionLink(@"Add a new company", "AddCompany/")</div>
-    <div>@Html.ActionLink(@"Add a new Store", "AddStore/", "Store")</div>
-    @foreach (General.Models.Company company in Model.lCompany)
-    {
-        <div id="multiColumn" class="LeftAlignInside col-lg-6 divStyle">
-            <div class="LeftColumn">
-                @Html.ActionLink(@company.name, "Home/" + @company.id, "Store")
-                <div>@company.organizationNumber</div> 
-                <div>@company.notes</div>
+    <h4>@Html.ActionLink(@"Add a new company", "AddCompany/")</h4>
+    <h4>@Html.ActionLink(@"Add a new Store", "AddStore/", "Store")</h4>
+    <div class="Suroundingstyle">
+        @foreach (General.Models.Company company in Model.lCompany)
+        {
+            <div id="multiColumn" class="LeftAlignInside col-lg-6 divStyle">
+                <div class="LeftColumn">
+                    @Html.ActionLink(@company.name, "Home/" + @company.id, "Store")
+                    <div>@company.organizationNumber</div>
+                    <div>@company.notes</div>
+                </div>
+                <div class="RightColumn">
+                    <div>@Html.ActionLink(@"Edit", "EditCompany/" + @company.id)</div>
+                    <div>@Html.ActionLink(@"Delete", "DeleteCompany/" + @company.id)</div>
+                </div>
             </div>
-            <div class="RightColumn">
-                <div>@Html.ActionLink(@"Edit", "EditCompany/" + @company.id)</div>
-                <div>@Html.ActionLink(@"Delete", "DeleteCompany/" + @company.id)</div>                    
-            </div>
-        </div>
-    }
+        }
+    </div>
 </section>
 
 

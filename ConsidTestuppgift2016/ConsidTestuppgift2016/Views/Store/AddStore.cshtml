@@ -7,7 +7,7 @@
     @using (Html.BeginForm("AddStore", "Store", FormMethod.Post))
     {
         <div>
-            Name:
+            Company:
             <span>
                 @Html.DropDownListFor(model => model.store.companyId, new SelectList(Model.lCompany, "id", "Name"))
             </span>
@@ -15,43 +15,41 @@
         <div>
             Name:
             <div>
-                @Html.TextBoxFor(model => model.store.name, new { @class = "textBox" })
+                @Html.TextBoxFor(model => model.store.name, new { @class = "textBox", @required = "required",
+                                                                   InputType = "text", placeholder = "Name" })
+                @Html.ValidationMessageFor(model => model.store.name)
             </div>
         </div>
         <div>
             Address:
             <div>
-                @Html.TextBoxFor(model => model.store.address, new { @class = "textBox" })
+                @Html.TextBoxFor(model => model.store.address, new { @class = "textBox", @required = "required",
+                                                                      InputType = "text", placeholder = "Adress" })
+                @Html.ValidationMessageFor(model => model.store.address)
             </div>
         </div>
         <div>
             City:
             <div>
-                @Html.TextBoxFor(model => model.store.city, new { @class = "textBoxWide" })
+                @Html.TextBoxFor(model => model.store.city, new { @class = "textBoxWide", @required = "required",
+                                                                   InputType = "text", placeholder = "City" })
+                @Html.ValidationMessageFor(model => model.store.city)
             </div>
         </div>
         <div>
-            Zip:
+            Zip code:
             <div>
-                @Html.TextBoxFor(model => model.store.zip, new { @class = "textBoxWide" })
+                @Html.TextBoxFor(model => model.store.zip, new { @class = "textBoxWide", @required = "required",
+                                                                  InputType = "text", placeholder = "Zip code" })
+                @Html.ValidationMessageFor(model => model.store.zip)
             </div>
         </div>
         <div>
             Country:
             <div>
-                @Html.TextBoxFor(model => model.store.country, new { @class = "textBoxWide" })
-            </div>
-        </div>
-        <div>
-            Longitude:
-            <div>
-                @Html.TextBoxFor(model => model.store.longitude, new { @class = "textBoxWide" })
-            </div>
-        </div>
-        <div>
-            Latitude:
-            <div>
-                @Html.TextBoxFor(model => model.store.latitude, new { @class = "textBoxWide" })
+                @Html.TextBoxFor(model => model.store.country, new { @class = "textBoxWide", @required = "required",
+                                                                      InputType = "text", placeholder = "Country" })
+                @Html.ValidationMessageFor(model => model.store.country)
             </div>
         </div>
         <input type="submit" value="Add" />

@@ -11,59 +11,78 @@ namespace ConsidTestuppgift2016.Controllers
 {
     public class StoreController : Controller
     {
-        private System.Web.ModelBinding.ModelStateDictionary _modelState;
         private IStoreServices _iStoreServices;
         private ICompanyServices _iCompanyServices;
         
 
         public StoreController()
         {
-            _modelState = new System.Web.ModelBinding.ModelStateDictionary();
-            //_iStoreServices = new StoreServices(new ModelStateWrapper(_modelState), new Repository.Repositories.IStoreRepository());
-            _iCompanyServices = new CompanyServices(new ModelStateWrapper(_modelState), new Repository.Repositories.ICompanyRepository());
+            _iStoreServices = new StoreServices();
+            _iCompanyServices = new CompanyServices();
         }
 
-        public StoreController(IStoreServices iStoreServices, ICompanyServices iCompanyServices)
-        {
-            _iStoreServices = iStoreServices;
-            _iCompanyServices = iCompanyServices;
-        }
-
+        // Get: /Store/Home
+        // Shows a list of a Companys Stories
         public ActionResult Home()
         {
-            string companyId = RouteData.Values["id"].ToString();
-            StoreHomeViewModel stores = new StoreHomeViewModel();
-            stores.company = _iCompanyServices.Get(new Guid(companyId));
-            stores.lStore = _iStoreServices.List(new Guid(companyId));
-            return View(stores);
+            try
+            {
+                string companyId = RouteData.Values["id"].ToString();
+                StoreHomeViewModel stores = new StoreHomeViewModel();
+                stores.company = _iCompanyServices.Get(new Guid(companyId));
+                stores.lStore = _iStoreServices.List(new Guid(companyId));
+                return View(stores);
+            }
+            catch (Exception)
+            {
+                return View("Error");
+            }
         }
 
         // GET: Store/AddStore
+        // Allows user to edit a Store
         public ActionResult AddStore()
         {
-            StoreViewModel store = new StoreViewModel();
-            store.lCompany = _iCompanyServices.List();
-            return View(store);
+            try
+            {
+                StoreViewModel store = new StoreViewModel();
+                store.lCompany = _iCompanyServices.List();
+                return View(store);
+            }
+            catch (Exception)
+            {
+                return View("Error");
+            }
         }        
 
         // POST: Store/AddStore
+        // Adds a new store
         [HttpPost]
         public ActionResult AddStore(Store store)
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    StoreViewModel storeViewModel = new StoreViewModel();
+                    storeViewModel.store = store;
+                    storeViewModel.lCompany = _iCompanyServices.List();
+                    return View(storeViewModel);
+                }
+
                 store.id = Guid.NewGuid();
                 _iStoreServices.Add(store);
-                return RedirectToAction("Home", "Company");
+                return RedirectToAction("Home/" + store.companyId);
             }
             catch (Exception)
             {
-                return RedirectToAction("Home", "Company");
+                return View("Error");
             }
             
         }
 
         // GET: Store/EditStore
+        // Allows user to edit a store
         public ActionResult EditStore()
         {
             try
@@ -77,31 +96,48 @@ namespace ConsidTestuppgift2016.Controllers
             }
             catch (Exception)
             {
-                return RedirectToAction("Home", "Company");
+                return View("Error");
             }            
         }
 
         // POST: Store/EditStore
+        // Updates the edited store
         [HttpPost]
         public ActionResult EditStore(Store store)
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    StoreViewModel storeViewModel = new StoreViewModel();
+                    storeViewModel.store = store;
+                    storeViewModel.lCompany = _iCompanyServices.List();
+                    storeViewModel.selectetCompany = _iCompanyServices.Get(storeViewModel.store.companyId);
+                    return View(storeViewModel);
+                }
                 _iStoreServices.update(store);
                 return RedirectToAction("Home/" + store.companyId);
             }
             catch (Exception)
             {
-                return RedirectToAction("Home" + store.companyId);
+                return View("Error");
             }
             
         }
 
         // DELETE: Store/DeleteStore
+        // Deletes the selected store
         public ActionResult DeleteStore(Store store)
         {
-            _iStoreServices.Delete(store.id);
-            return RedirectToAction("Home/"+ store.companyId);
+            try
+            {
+                _iStoreServices.Delete(store.id);
+                return RedirectToAction("Home/" + store.companyId);
+            }
+            catch (Exception)
+            {
+                return View("Error");
+            }
         }
     }
 }

@@ -8,29 +8,29 @@
     @using (Html.BeginForm("AddCompany", "Company", FormMethod.Post))
     {
         <div>
-            <span hidden>
-                Name: Guid
-                @Html.TextBoxFor(model => model.id)
-            </span>
+            @Html.HiddenFor(model => model.id)
         </div>
         <div>
             Name:
             <div>
-                @Html.TextBoxFor(model => model.name, new { @class = "textBox", @required = "required", @type = "text", @maxlength = "50" })
+                @Html.TextBoxFor(model => model.name, new { @class = "textBox", @required = "required",
+                                                            @type = "text", @maxlength = "50", placeholder = "Name" })
                 @Html.ValidationMessageFor(model => model.name)
             </div>
         </div>
         <div>
             OrganizationNumber:
             <div>
-                @Html.TextBoxFor(model => model.organizationNumber, new { @class = "textBox", @required = "required", @type = "number", @maxlength = "5" })
+                @Html.TextBoxFor(model => model.organizationNumber, new { @class = "textBox", @required = "required",
+                                                                          @type = "number", placeholder = "OrganizationNumber" })
                 @Html.ValidationMessageFor(model => model.organizationNumber)
             </div>
         </div>
         <div>
             Note:
             <div>
-                @Html.TextBoxFor(model => model.notes, new { @class = "textBoxWide"})
+                @Html.TextBoxFor(model => model.notes, new { @class = "textBoxWide", placeholder = "Note",
+                                                             @type = "text", @maxlength = "500" })
             </div>
         </div>
         <input type="submit" value="Add" />

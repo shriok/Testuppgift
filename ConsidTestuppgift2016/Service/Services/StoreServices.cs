@@ -12,25 +12,11 @@ namespace Service.Services
 {
     public class StoreServices: IStoreServices
     {
-        private IValidationDictionary _validatonDictionary;
         private IStoreRepository _iStoreRepository;
 
-        public StoreServices(IValidationDictionary validationDictionary, IStoreRepository iStoreRepository)
+        public StoreServices()
         {
-            _validatonDictionary = validationDictionary;
-            _iStoreRepository = iStoreRepository;
-        }
-
-        public bool ValidateStore(Store storeToValidate)
-        {
-            if (storeToValidate.name == null || storeToValidate.name.Trim().Length == 0)
-            {
-                _validatonDictionary.AddError("Name", "Name is required.");
-            }
-
-           
-
-            return _validatonDictionary.IsValid;
+            _iStoreRepository = new StoreRepository();
         }
 
         /// <summary>
@@ -41,11 +27,11 @@ namespace Service.Services
         {
             try
             {
-                _iStoreRepository.Add(CustomMapper.MapTo.Store(store));
+                _iStoreRepository.Add(CustomMapper.MapTo.Store(store));               
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }               
         }
 
@@ -61,9 +47,9 @@ namespace Service.Services
                 Store store = CustomMapper.MapTo.Store(_iStoreRepository.Get(companyId));
                 return store;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -77,9 +63,9 @@ namespace Service.Services
             {
                 _iStoreRepository.Update(CustomMapper.MapTo.Store(store));
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -93,13 +79,18 @@ namespace Service.Services
             {
                 _iStoreRepository.Delete(storeId);
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
-                throw e;
+                throw;
             }
         }
 
+        /// <summary>
+        /// returns a list of a companys stores
+        /// </summary>
+        /// <param name="companyId">Id of Company (Guid)</param>
+        /// <returns>returns a list of a companys stores</returns>
         public List<Store> List(Guid companyId)
         {
             try
@@ -107,10 +98,9 @@ namespace Service.Services
                 List<Store> LStore = CustomMapper.MapTo.Stores(_iStoreRepository.List(companyId));
                 return LStore;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-
-                throw e;
+                throw;
             }
         }
     }

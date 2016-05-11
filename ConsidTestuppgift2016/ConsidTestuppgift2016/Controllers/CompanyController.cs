@@ -13,31 +13,33 @@ namespace ConsidTestuppgift2016.Controllers
 {
     public class CompanyController : Controller
     {
-        private System.Web.ModelBinding.ModelStateDictionary _modelState;
         private ICompanyServices _iCompanyServices;
 
         public CompanyController()
         {
-            _modelState = new System.Web.ModelBinding.ModelStateDictionary();
-            _iCompanyServices = new CompanyServices(new ModelStateWrapper(_modelState), new Repository.Repositories.ICompanyRepository());
-        }
-
-        public CompanyController(ICompanyServices iCompanyServices)
-        {
-            _iCompanyServices = iCompanyServices;
+            _iCompanyServices = new CompanyServices();
         }
 
         // GET: Company/Home
+        // Returns View that shows all Companys
         public ActionResult Home()
-        {            
-            CompanyHomeViewModel companyHomeViewModel = new CompanyHomeViewModel();
-            companyHomeViewModel.lCompany = _iCompanyServices.List().OrderBy(o=>o.name).ToList();            
-            return View(companyHomeViewModel);            
+        {
+            try
+            {
+                CompanyHomeViewModel companyHomeViewModel = new CompanyHomeViewModel();
+                companyHomeViewModel.lCompany = _iCompanyServices.List().OrderBy(o => o.name).ToList();
+                return View(companyHomeViewModel);
+            }
+            catch (Exception)
+            {
+                return View("Error");
+            }                       
         }
 
         // DELETE: Company/DeleteCompany
+        // Deletes chosen company with connected storys
         public ActionResult DeleteCompany()
-        {            
+        {
             try
             {
                 string companyId = RouteData.Values["id"].ToString();
@@ -45,12 +47,13 @@ namespace ConsidTestuppgift2016.Controllers
             }
             catch (Exception)
             {
-                ViewBag.result = "Error Could not delete Company";
+                return View("Error");
             }
             return RedirectToAction("Home");
         }
 
         // GET: Company/EditCompany
+        // Allows user to edit a Company
         public ActionResult EditCompany()
         {
             try
@@ -60,53 +63,60 @@ namespace ConsidTestuppgift2016.Controllers
             }
             catch (Exception)
             {
-                return RedirectToAction("Home");
+                return View("Error");
             }
             
         }
 
         // POST: Company/EditCompany
+        // Saves updated Company
         [HttpPost]
         public ActionResult EditCompany(Company updatedComp)
         {
             try
             {
-                if (!_iCompanyServices.Update(updatedComp))
+                if (!ModelState.IsValid)
                 {
-                    return View();
+                    return View(updatedComp);
                 }
+
+                _iCompanyServices.Update(updatedComp);
+                return RedirectToAction("Home");
             }
             catch (Exception)
             {
-                throw;
+                return View("Error");
             }
-            return RedirectToAction("Home");
+            
         }
 
         // GET: Company/AddCompany
+        // Allows user to add a new Company
         public ActionResult AddCompany()
         {
             return View(new Company());
         }
 
         // POST: Company/AddCompany
+        // Saves new Company
         [HttpPost]
         public ActionResult AddCompany(Company company)
         {
             try
             {
-                company.id = Guid.NewGuid();
-                if (!_iCompanyServices.Add(company))
+                if (!ModelState.IsValid)
                 {
                     return View();
-                }               
-                
+                }
+
+                company.id = Guid.NewGuid();
+                _iCompanyServices.Add(company);
                 return RedirectToAction("Home");
                 
             }
             catch (Exception)
             {
-                return RedirectToAction("Home");
+                return View("Error");
             }
             
         }

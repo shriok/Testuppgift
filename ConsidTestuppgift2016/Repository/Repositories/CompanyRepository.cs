@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Repository.Repositories
 {
-    public class ICompanyRepository: Interface.ICompanyRepository
+    public class CompanyRepository: ICompanyRepository
     {
         
         /// <summary>
@@ -16,12 +16,20 @@ namespace Repository.Repositories
         /// <returns>Returns a list of ALL Repository.Companies</returns>
         public List<Repository.Companies> List()
         {
-            List<Repository.Companies> LCompany = new List<Repository.Companies>();
-            using (var db = new CompaniesDBEntities())
+            try
             {
-                LCompany.AddRange(db.Companies.ToList());
+                List<Repository.Companies> LCompany = new List<Repository.Companies>();
+                using (var db = new CompaniesDBEntities())
+                {
+                    LCompany.AddRange(db.Companies.ToList());
+                }
+                return LCompany;
             }
-            return LCompany;
+            catch (Exception)
+            {
+
+                throw;
+            }            
         }
 
         /// <summary>
@@ -40,10 +48,10 @@ namespace Repository.Repositories
                 }
                 return company;
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
-                throw e;
+                throw;
             }
         }
 
@@ -63,10 +71,10 @@ namespace Repository.Repositories
                     db.SaveChanges();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
-                throw e;
+                throw;
             }
         }
 
@@ -84,10 +92,10 @@ namespace Repository.Repositories
                     db.SaveChanges();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
-                throw e;
+                throw;
             }
         }
 
@@ -108,10 +116,10 @@ namespace Repository.Repositories
                     db.SaveChanges();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
-                throw e;
+                throw;
             }
         }
     }

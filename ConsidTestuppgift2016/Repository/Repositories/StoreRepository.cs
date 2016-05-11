@@ -9,6 +9,14 @@ namespace Repository.Repositories
 {
     public class StoreRepository: IStoreRepository
     {
+
+        private IGoogleMapsRepository _iGoogleMapsRepository;
+
+        public StoreRepository()
+        {
+            _iGoogleMapsRepository = new GoogleMapsRepository(this);
+        }
+
         /// <summary>
         /// Returns a list of all stores with foreingKeyId companyId
         /// </summary>
@@ -25,10 +33,9 @@ namespace Repository.Repositories
                 }
                 return LStore;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-
-                throw e;
+                throw;
             }
         }
 
@@ -48,10 +55,10 @@ namespace Repository.Repositories
                 }
                     return store;
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
-                throw e;
+                throw;
             }
         }
 
@@ -69,11 +76,14 @@ namespace Repository.Repositories
                     db.Stores.Add(NewStore);
                     db.SaveChanges();
                 }
+                Task.Run(() => {
+                    _iGoogleMapsRepository.Post(NewStore);
+                });
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
-                throw e;
+                throw;
             }
         }
 
@@ -93,10 +103,9 @@ namespace Repository.Repositories
                     db.SaveChanges();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-
-                throw e;
+                throw;
             }
         }
 
@@ -108,9 +117,10 @@ namespace Repository.Repositories
         {
             try
             {
+                Repository.Stores storeToUpdate;
                 using (var db = new CompaniesDBEntities())
                 {
-                    Repository.Stores storeToUpdate = db.Stores.Find(updatedStore.Id);
+                    storeToUpdate = db.Stores.Find(updatedStore.Id);
                     storeToUpdate.CompanyId = updatedStore.CompanyId;
                     storeToUpdate.Name = updatedStore.Name;
                     storeToUpdate.Address = updatedStore.Address;
@@ -120,12 +130,16 @@ namespace Repository.Repositories
                     storeToUpdate.Longitude = updatedStore.Longitude;
                     storeToUpdate.Latitude = updatedStore.Latitude;
                     db.SaveChanges();
+                                       
                 }
+                Task.Run(() => {
+                    _iGoogleMapsRepository.Post(storeToUpdate);
+                });
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
-                throw e;
+                throw;
             }
         }
     }

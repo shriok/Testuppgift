@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace General.Models
 {
@@ -14,19 +10,19 @@ namespace General.Models
         public Guid companyId { get; set; }
 
         [Required(ErrorMessage = "Name is required")]
-        [StringLength(30)]
+        [StringLength(30, ErrorMessage = "Name may not be longer then 30 letters")]
         public string name { get; set; }
         [Required(ErrorMessage = "Address is required")]
-        [StringLength(30)]
+        [StringLength(30, ErrorMessage = "Address may not be longer then 30 letters")]
         public string address { get; set; }
         [Required(ErrorMessage = "City is required")]
-        [StringLength(30)]
+        [StringLength(30, ErrorMessage = "City may not be longer then 30 letters")]
         public string city { get; set; }
         [Required(ErrorMessage = "Zip code is required")]
-        [StringLength(10)]
+        [StringLength(10, ErrorMessage = "Zip code may not be longer then 10 letters")]
         public string zip { get; set; }
         [Required(ErrorMessage = "Country is required")]
-        [StringLength(30)]
+        [StringLength(30, ErrorMessage = "Country may not be longer then 30 letters")]
         public string country { get; set; }
 
         public string longitude { get; set; }

@@ -32,12 +32,12 @@ namespace Service.Interface
         /// Adds a new company to database
         /// </summary>
         /// <param name="company">Company to add</param>
-        bool Add(Company company);
+        void Add(Company company);
 
         /// <summary>
         /// Uppdates a company
         /// </summary>
         /// <param name="company">The updated Company</param>
-        bool Update(Company company);
+        void Update(Company company);
     }
 }
